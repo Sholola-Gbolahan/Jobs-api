@@ -1,0 +1,29 @@
+const mongoose = require("mongoose")
+
+const UserSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Please provide name"],
+    minlength: 3,
+    maxLength: 50,
+  },
+  email: {
+    type: String,
+    required: [true, "Please provide email"],
+    // Added regular expression (regex) to ensure provided email is valid
+    match: [
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "please provide valid email",
+    ],
+    // This create a unique index, and it's not a validator.
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: [true, "Please provide password"],
+    minlength: 6,
+    maxLength: 12,
+  },
+})
+
+module.exports = mongoose.model("User", UserSchema)
