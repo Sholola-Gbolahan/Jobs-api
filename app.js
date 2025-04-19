@@ -1,6 +1,9 @@
 require("dotenv").config()
 require("express-async-errors")
 const express = require("express")
+
+const authenticationUser = require("./middleware/authentication")
+
 const app = express()
 
 // import connectDB
@@ -20,7 +23,8 @@ app.use(express.json())
 // routes
 // Normal config will be  - "Domain/api/v1/jobs", "Domain/api/v1/jobs/:id"
 app.use("/api/v1/auth", authRouter)
-app.use("/api/v1/jobs", jobsRouter)
+// Applying to all jobs route
+app.use("/api/v1/jobs", authenticationUser, jobsRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
