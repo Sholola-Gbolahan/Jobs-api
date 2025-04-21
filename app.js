@@ -2,8 +2,6 @@ require("dotenv").config()
 require("express-async-errors")
 const express = require("express")
 
-const authenticationUser = require("./middleware/authentication")
-
 const app = express()
 
 // import connectDB
@@ -16,6 +14,7 @@ const jobsRouter = require("./routes/jobs")
 // error handler
 const notFoundMiddleware = require("./middleware/not-found")
 const errorHandlerMiddleware = require("./middleware/error-handler")
+const authenticationUser = require("./middleware/authentication")
 
 app.use(express.json())
 // extra packages
