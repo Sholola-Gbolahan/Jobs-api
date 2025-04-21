@@ -22,9 +22,12 @@ const notFoundMiddleware = require("./middleware/not-found")
 const errorHandlerMiddleware = require("./middleware/error-handler")
 const authenticationUser = require("./middleware/authentication")
 
+app.get("/", (req, res) => {
+  res.send("<h1> Welcome to Jobs Api</h1>")
+})
+
 app.use(express.json())
 // extra packages
-
 // routes
 // Normal config will be  - "Domain/api/v1/jobs", "Domain/api/v1/jobs/:id"
 app.use("/api/v1/auth", authRouter)
