@@ -6,7 +6,7 @@ const register = async (req, res) => {
   const user = await User.create({ ...req.body });
 
   const userExit = await User.findOne({ email });
-  if (userExit) {
+  if (user.email === userExit.email) {
     throw new BadRequestError("User Already Exit");
   }
   const token = user.createJWT();
